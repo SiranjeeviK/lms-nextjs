@@ -44,13 +44,16 @@ model Category {
 }
 
 model Attachment {
+  // Basic fields
   id   String @id @default(uuid())
   name String
   url  String @db.Text
 
+// Relations
   courseId String
-  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade) //once the course is deleted, the attachment will be deleted as well
 
+// Timestamps
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
