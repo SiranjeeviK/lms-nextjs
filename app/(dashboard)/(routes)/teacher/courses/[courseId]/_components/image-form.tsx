@@ -38,13 +38,10 @@ const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
 
   const onSubmit = async (values: FormType) => {
     try {
-      // const res = await axios.patch(`/api/courses/${courseId}`, values);
-      // console.log("IMAGE FORM", res);
+      await axios.patch(`/api/courses/${courseId}`, values);
       toast.success("Course updated");
       toggleEditing();
-      initialData.imageUrl = values.imageUrl;
-      // router.refresh();
-      console.log(values);
+      router.refresh();
     } catch {
       toast.error("Something went wrong");
     }
