@@ -2,6 +2,9 @@
   "name": "lms-nextjs",
   "version": "0.1.0",
   "private": true,
+  "prisma":{
+    "seed": "ts-node ./scripts/seed.ts"
+  },
   "scripts": {
     "$help": "echo This is a custom help message",
     "dev": "next dev",
@@ -19,6 +22,7 @@
     "dev:prisma:push": "dotenv -e .env.local -- npx prisma db push",
     "dev:prisma:reset": "dotenv -e .env.local -- npx prisma migrate reset --skip-seed && dotenv -e .env.local -- npx prisma db push",
     "dev:prisma:studio": "dotenv -e .env.local -- npx prisma studio",
+    "dev:prisma:seed": "dotenv -e .env.local -- npx prisma db seed",
     "$comment": "the following scripts are just references",
     "$dev:db:init": "dotenv -e .env.local -- npx prisma generate && dotenv -e .env.local -- npx prisma db push",
     "$dev:db:push": "dotenv -e .env.local -- npx prisma db push",
@@ -34,11 +38,13 @@
     "@prisma/client": "^5.22.0",
     "@radix-ui/react-dialog": "^1.1.2",
     "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-popover": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "@uploadthing/react": "^7.1.1",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "cmdk": "^1.0.0",
     "dotenv-cli": "^7.4.2",
     "lucide-react": "^0.456.0",
     "next": "14.2.16",
@@ -52,7 +58,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.17.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
@@ -60,6 +66,7 @@
     "postcss": "^8",
     "prisma": "^5.22.0",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
   }
 }
