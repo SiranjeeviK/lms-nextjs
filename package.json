@@ -5,6 +5,7 @@
   "scripts": {
     "$help": "echo This is a custom help message",
     "dev": "next dev",
+    "postinstall": "prisma generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
