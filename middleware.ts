@@ -3,7 +3,12 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 // Since Core 2 version of clerk, it made all routes public by default
 
 // This matcher will match any route that starts with /sign-in or /sign-up (these are public routes)
-const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)"]);
+const isPublicRoute = createRouteMatcher([
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/api/uploadthing",
+  "/api/webhook",
+]);
 
 // This middleware will run for all routes except the public routes and make sure the user is authenticated
 export default clerkMiddleware(
