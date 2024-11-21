@@ -8,6 +8,7 @@
   "scripts": {
     "$help": "echo This is a custom help message",
     "dev": "next dev",
+    "dev:turbo": "next dev --turbo",
     "postinstall": "prisma generate",
     "build": "next build",
     "start": "next start",

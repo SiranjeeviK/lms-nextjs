@@ -94,7 +94,6 @@ const ImageForm = ({ initialData, courseId }: ImageFormProps) => {
           />
           <div className="text-xs text-muted-foreground mt-4">
             16:9 aspect ratio recommended
-            <p>{initialData.imageUrl || "No image url"}</p>
           </div>
         </div>
       )}
