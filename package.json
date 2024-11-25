@@ -37,6 +37,8 @@
     "@clerk/nextjs": "^6.3.0",
     "@hello-pangea/dnd": "^17.0.0",
     "@hookform/resolvers": "^3.9.1",
+    "@mux/mux-node": "^9.0.1",
+    "@mux/mux-player-react": "^3.1.0",
     "@prisma/client": "^5.22.0",
     "@radix-ui/react-checkbox": "^1.1.2",
     "@radix-ui/react-dialog": "^1.1.2",
