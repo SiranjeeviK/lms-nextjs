@@ -61,7 +61,7 @@ const CourseIdPage = async ({
     course.title,
     course.description,
     course.imageUrl,
-    course.price,
+    course.price !== null, // Allow price to be 0
     course.categoryId,
     course.chapters.some((chapter) => chapter.isPublished),
   ];

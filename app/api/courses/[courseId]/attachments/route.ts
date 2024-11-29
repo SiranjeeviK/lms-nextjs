@@ -4,13 +4,14 @@ import { NextResponse } from "next/server";
 
 export async function POST(
   req: Request,
-  { params }: { params: { courseId: string } }
+  { params }: { params: { courseId: string } },
 ) {
   try {
     const { userId } = await auth();
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+    // const { url, name } = await req.json();
     const { url } = await req.json();
 
     const courseOwner = await db.course.findUnique({
@@ -27,7 +28,8 @@ export async function POST(
     const attachment = await db.attachment.create({
       data: {
         url,
-        name: url.split("/").pop(),
+        name: url.split("/").pop(), //XXX
+        // name: name || "Attachment",
         courseId: params.courseId,
       },
     });
