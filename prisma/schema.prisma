@@ -14,7 +14,7 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
   // TODO: May need to enable full text search or index feature in future
-  // previewFeatures = [""]
+  previewFeatures = ["fullTextSearch", "fullTextIndex"] // not sure if this is needed for postgres since it's not supported yet
 }
 
 model Course {
@@ -29,13 +29,15 @@ model Course {
   categoryId String?
   category   Category? @relation(fields: [categoryId], references: [id])
 
-  chapters     Chapter[]
+  chapters    Chapter[]
   attachments Attachment[]
   purchases   Purchase[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // @@fulltext([title])
+  @@index([title]) //since full text search is not supported yet for Postgres, we will use regular index for now
   @@index([categoryId])
 }
 
@@ -119,6 +121,7 @@ model Purchase {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([userId, courseId])
   @@index([courseId])
 }
 
