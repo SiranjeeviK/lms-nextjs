@@ -61,7 +61,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 9. Run the following command to create a new webhook. Make sure to replace `localhost:3000` with your own domain name if production. Don't close the terminal after running this command, this is where the webhook will be listening for events. The logs like payment success, payment failure, etc will be displayed here.
 
    ```bash
-       stripe listen --forward-to localhost:3000/api/webhook
+    stripe listen --forward-to localhost:3000/api/webhook
    ```
 
 10. Copy the webhook signing secret and add it to your `.env.local` file or `.env` file

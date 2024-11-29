@@ -7,6 +7,7 @@ import CourseEnrollButton from "./_components/course-enroll-button";
 import { Separator } from "@/components/ui/separator";
 import Preview from "@/components/preview";
 import { File } from "lucide-react";
+import CourseProgressButton from "./_components/course-progress-button";
 
 const ChapterIdPage = async ({
   params,
@@ -60,7 +61,7 @@ const ChapterIdPage = async ({
             chapterId={params.chapterId}
             title={chapter.title}
             courseId={params.courseId}
-            nextChapter={nextChapter?.id}
+            nextChapterId={nextChapter?.id}
             // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
             playbackId={muxData?.playbackId!}
             isLocked={isLocked}
@@ -71,7 +72,12 @@ const ChapterIdPage = async ({
           <div className="flex flex-col items-center justify-between p-4 md:flex-row">
             <h2 className="mb-2 text-2xl font-semibold">{chapter.title}</h2>
             {purchase ? (
-              <div>{/* TODO:Add CourseProgressButton */}</div>
+              <CourseProgressButton
+                courseId={params.courseId}
+                chapterId={params.chapterId}
+                nextChapterId={nextChapter?.id}
+                isCompleted={!!userProgress?.isCompleted}
+              />
             ) : (
               <CourseEnrollButton
                 courseId={params.courseId}
@@ -88,15 +94,17 @@ const ChapterIdPage = async ({
             <>
               <Separator />
               <div className="p-4">
-                {attachments.map((attachment) => (
+                {attachments.map((attachment, index) => (
                   <a
                     className="flex w-full items-center rounded-md border bg-sky-200 p-3 text-sky-700 hover:underline"
                     key={attachment.id}
                     href={attachment.url}
                     target="_blank"
                   >
-                    <File />
-                    <p className="line-clamp-1">{attachment.name}</p>
+                    <File className="mr-2" />
+                    <p className="line-clamp-1">
+                      {attachment.name + " " + (index + 1)}
+                    </p>
                   </a>
                 ))}
               </div>

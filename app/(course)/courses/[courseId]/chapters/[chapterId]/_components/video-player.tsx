@@ -13,7 +13,7 @@ interface VideoPlayerProps {
   chapterId: string;
   title: string;
   courseId: string;
-  nextChapter?: string;
+  nextChapterId?: string;
   playbackId: string;
   isLocked: boolean;
   completeOnEnd: boolean;
@@ -23,12 +23,43 @@ const VideoPlayer = ({
   chapterId,
   title,
   courseId,
-  nextChapter,
+  nextChapterId,
   playbackId,
   isLocked,
   completeOnEnd,
 }: VideoPlayerProps) => {
   const [isReady, setIsReady] = useState(false);
+  const router = useRouter();
+  const confetti = useConfettiStore();
+
+  const onEnd = async () => {
+    try {
+      // `completeOnEnd` is a prop that is passed to the VideoPlayer component that help in not redirecting when rewaching the video
+      if (completeOnEnd) {
+        await axios.put(
+          `/api/courses/${courseId}/chapters/${chapterId}/progress`,
+          {
+            isCompleted: true,
+          },
+        );
+
+        if (!nextChapterId) {
+          confetti.onOpen();
+          toast.success("Course completed");
+        }
+        
+        if (nextChapterId) {
+          router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
+        }
+
+        toast.success("Progress updated");
+        router.refresh();
+      }
+    } catch (error) {
+      toast.error("Something went wrong.");
+      console.log("[VideoPlayer]", error);
+    }
+  };
   return (
     <div className="relative aspect-video">
       {!isReady && !isLocked && (
@@ -47,7 +78,7 @@ const VideoPlayer = ({
           title={title}
           className={cn(!isReady && "hidden")}
           onCanPlay={() => setIsReady(true)}
-          onEnded={() => {}}
+          onEnded={onEnd}
           autoPlay
           playbackId={playbackId}
         />
