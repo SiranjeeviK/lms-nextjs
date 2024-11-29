@@ -1,25 +1,26 @@
-const { PrismaClient } = require('@prisma/client');
-
-const db = new PrismaClient();
+/* eslint-disable @typescript-eslint/no-require-imports */
+const { PrismaClient } = require("@prisma/client");
+const database = new PrismaClient();
 
 async function main() {
-    try {
-        await db.Category.createMany({
-            data : [
-                {name : "Compiler design"},
-                {name : "Web development"},
-                {name : "Machine learning"},
-                {name : "Artificial intelligence"},
-                {name : "Operating systems"},
-                {name : "Database management"},
-            ]
-        });
-        console.log("Successs");
-    } catch (error) {
-        console.log("Error seeding the database categories", error);
-    }finally {
-        await db.$disconnect();
-    }
+  try {
+    await database.category.createMany({
+      data: [
+        { name: "Computer Science" },
+        { name: "Music" },
+        { name: "Fitness" },
+        { name: "Photography" },
+        { name: "Accounting" },
+        { name: "Engineering" },
+        { name: "Filming" },
+      ],
+    });
+    console.log("[SEED] Database categories seeded successfully");
+  } catch (error) {
+    console.log("[SEED ERROR] Error seeding the database categories", error);
+  } finally {
+    await database.$disconnect();
+  }
 }
 
 main();

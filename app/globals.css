@@ -11,6 +11,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.ql-container{
+  font-size: 16px !important;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

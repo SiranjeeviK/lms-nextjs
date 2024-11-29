@@ -6,8 +6,8 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 const isPublicRoute = createRouteMatcher([
   "/sign-in(.*)",
   "/sign-up(.*)",
-  "/api/uploadthing",
-  "/api/webhook",
+  "/api/uploadthing", // for uploading images
+  "/api/webhook", // for stripe webhook
 ]);
 
 // This middleware will run for all routes except the public routes and make sure the user is authenticated
