@@ -108,6 +108,7 @@ export async function PATCH(
 ) {
   try {
     const { userId } = await auth();
+    // TODO: Do some thing with isPublished
     const { isPublished, ...values } = await req.json();
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -144,19 +145,47 @@ export async function PATCH(
 
     if (values.videoUrl) {
       // Clean up existing Mux data
+      console.info(
+        "[COURSE CHAPTER ID PATCH] ",
+        "CLEANING UP EXISTING MUX DATA ...",
+      );
       const existingMuxData = await db.muxData.findFirst({
         where: {
           chapterId: updatedChapter.id,
         },
       });
+      console.info("[COURSE CHAPTER ID PATCH] ", "FOUND EXISTING MUX DATA");
 
       if (existingMuxData) {
-        await video.assets.delete(existingMuxData.assetId);
+        // video.assets.retrieve(existingMuxData.assetId).then((asset) => {
+        //   console.log("MUX ASSET", JSON.stringify(asset, null, 2));
+        //   if (asset.status === "ready") {
+        //     video.assets.delete(existingMuxData.assetId);
+        //   }
+        // });
+        console.info("[COURSE CHAPTER ID PATCH] ", "Trying to delete asset...");
+        try {
+          const muxAsset = await video.assets.retrieve(existingMuxData.assetId);
+          console.info(
+            "[COURSE CHAPTER ID PATCH] Found",
+            JSON.stringify(muxAsset, null, 2),
+          );
+          if (muxAsset.status === "ready") {
+            await video.assets.delete(existingMuxData.assetId);
+          }
+          console.info("[COURSE CHAPTER ID PATCH] Deleted asset");
+        } catch (error) {
+          console.error(
+            "[COURSE CHAPTER ID PATCH] Error deleting asset",
+            error,
+          );
+        }
         await db.muxData.delete({
           where: {
             id: existingMuxData.id,
           },
         });
+        console.info("[COURSE CHAPTER ID PATCH] Deleted asset data from DB");
       }
 
       // Create new Mux data
