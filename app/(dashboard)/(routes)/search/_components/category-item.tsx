@@ -4,6 +4,7 @@ import qs from "query-string";
 import { cn } from "@/lib/utils";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { IconType } from "react-icons/lib";
+import { Suspense } from "react";
 
 interface CategoryItemProps {
   label?: string;
@@ -14,6 +15,27 @@ interface CategoryItemProps {
 const CategoryItem = ({ label, icon: Icon, value }: CategoryItemProps) => {
   const router = useRouter();
   const pathname = usePathname();
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CategoryItemContent
+        router={router}
+        pathname={pathname}
+        label={label}
+        icon={Icon}
+        value={value}
+      />
+    </Suspense>
+  );
+};
+
+const CategoryItemContent = ({
+  router,
+  pathname,
+  label,
+  icon: Icon,
+  value,
+}: CategoryItemProps & { router: ReturnType<typeof useRouter>; pathname: string }) => {
   const searchParams = useSearchParams();
 
   const currentCategoryId = searchParams.get("categoryId");

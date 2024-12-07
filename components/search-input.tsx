@@ -3,7 +3,7 @@ import qs from "query-string";
 import { Search } from "lucide-react";
 import { Input } from "./ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useDebounce } from "@/hooks/use-debounce";
 
 const SearchInput = () => {
@@ -44,4 +44,10 @@ const SearchInput = () => {
   );
 };
 
-export default SearchInput;
+const SearchInputWithSuspense = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <SearchInput />
+  </Suspense>
+);
+
+export default SearchInputWithSuspense;
