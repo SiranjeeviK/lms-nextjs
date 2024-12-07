@@ -108,7 +108,9 @@ export async function PATCH(
 ) {
   try {
     const { userId } = await auth();
-    // TODO: Do some thing with isPublished
+    // TODO: Do some thing with `isPublished`
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { isPublished, ...values } = await req.json();
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
