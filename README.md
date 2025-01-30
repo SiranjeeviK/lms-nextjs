@@ -1,3 +1,24 @@
+# Project Introduction
+
+   This web-based platform offers progress tracking and carefully 
+chosen educational resources, is designed to speed up skill acquisition. Instructors can quickly create 
+customized learning paths with the aid of a range of resources, such as Word documents, PDFs, videos, and links 
+to academic publications. Teachers can upload consolidated files, including Excel sheets and.bibtex files, to the 
+platform. Students can continuously track their progress thanks to an interactive dashboard that shows real
+time reading statistics, including the amount of time spent on particular topics and the estimated times needed 
+to complete particular skills. Effective learning journeys are facilitated by the dashboard's adherence to UX 
+principles, which guarantee an easy-to-use and accessible user experience. The platform tracks students' 
+progress in an effort to improve motivation, reveal patterns of learning, and optimize the learning process with 
+actionable analytics. This project makes use of the MERN stack to provide educators and students with a 
+scalable, intuitive solution.
+
+## Features
+- [x] **Progress Tracking**
+- [x] **Educational Resources**
+- [x] **Interactive Dashboard**
+- [ ] **Customized Learning Paths**
+- [ ] **Analytics and Insights**
+
 # Stripe Setup
 
 1. Create a Stripe account (US account)
